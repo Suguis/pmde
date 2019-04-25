@@ -13,7 +13,7 @@ keys.actions = {
 --- Gets an action from a key and returns it.
 -- @tparam string key the key from which calculate the action.
 -- @treturn string the action associated to that key.
-function keys.getAction(key)
+function keys.get_action(key)
   for k, v in pairs(keys.actions) do
     if key == v then return k end
   end
@@ -24,7 +24,7 @@ end
 -- @treturn Vector the unit Vector of the direction, or nil if the action is not
 -- a move action.
 -- @see Vector
-function keys.getMoveVector(moveAction)
+function keys.get_move_vector(moveAction)
   if moveAction == keys.actions.up then
     return _C.Vector:new(0, -1)
   elseif moveAction == keys.actions.down then

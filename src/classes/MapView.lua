@@ -14,7 +14,7 @@ local mfloor = math.floor
 function MapView:new(pos, floor, tileset)
   self.batch = love.graphics.newSpriteBatch(tileset, 512, "static")  -- TODO: this needs to be static
 
-  local toRet = setmetatable({
+  local to_ret = setmetatable({
     pos = _C.Vector:new(pos.x - (love.graphics.getWidth() / 2 - globals.CELL_SIZE / 2)
         / (globals.CELL_SIZE),
         pos.y - (love.graphics.getHeight() / 2 - globals.CELL_SIZE / 2)
@@ -22,33 +22,33 @@ function MapView:new(pos, floor, tileset)
     floor = floor,
   }, self)
 
-  toRet:update()
+  to_ret:update()
 
-  return toRet
+  return to_ret
 end
 
 --- Moves the view
 -- @tparam Vector dv the displacement Vector.
 function MapView:move(dv)
-  local oldPos = self.pos
+  local old_pos = self.pos
 
   self.pos = self.pos + dv
 
   -- Only update if we move one tile
-  if self.pos ~= oldPos then
+  if self.pos ~= old_pos then
     self:update()
   end
 
-  self:updateInstances()
+  self:update_instances()
 end
 
 --- Updates the draw positions of the MapView instances.
 --
 -- This functions requires to call it manually after adding into the Floor the
 -- corresponding instances.
-function MapView:updateInstances()
+function MapView:update_instances()
   for i = 1, #self.floor.pokemons do
-    self.floor.pokemons[i]:moveDraw(self.pos * -globals.CELL_SIZE)
+    self.floor.pokemons[i]:move_draw(self.pos * -globals.CELL_SIZE)
   end
 end
 
@@ -57,8 +57,8 @@ function MapView:update()
   self.batch:clear()
   for x = 1, globals.TILES_DISPLAY_WIDTH do
     for y = 1, globals.TILES_DISPLAY_HEIGHT do
-      self.batch:add(self.floor:getCell(
-          x + mfloor(self.pos.x), y + mfloor(self.pos.y)):getQuad(),
+      self.batch:add(self.floor:get_cell(
+          x + mfloor(self.pos.x), y + mfloor(self.pos.y)):get_quad(),
           (x - 1) * globals.CELL_SIZE, (y - 1) * globals.CELL_SIZE)
     end
   end

@@ -3,11 +3,12 @@
 local Cell = _C.Object:new()
 Cell.__index = Cell
 
+
 -- Static atributes
 Cell.quads = {}  -- A table to save all cell quads in the form: quads[type][bitvalue][alt]
 
+-- We use bitdef table data to make Cell.quads.
 local bitdef = require "src.bitdef"
-
 for t = 1, #bitdef do
   Cell.quads[t] = {}
   for bit = 0, 255 do
@@ -28,35 +29,34 @@ end
 --- Creates a Cell.
 -- @tparam number type the type of the Cell. Must be 0 (for wall) or 1 (for
 -- floor).
--- @raise an error if the type or the bitValue are incorrect.
+-- @raise an error if the type or the bit_value are incorrect.
 function Cell:new(type)
-  if type < 1 or type > 2 then
-    error("Incorrect type, must be 1 (wall) or 2 (floor)", 2)
-  end
+  assert(type >= 1 and type <= 2, "Incorrect type, must be 1 (wall) or 2 (floor)", 2)
+
   return setmetatable({
     type = type,
-    bitValue = nil
+    bit_value = nil
   }, self)
 end
 
 --- Returns the bit value value of the Cell.
--- @return the bit value value assigned to this Cell.
-function Cell:getBitValue()
-  return self.bitValue
+-- @treturn number the bit value value assigned to this Cell.
+function Cell:get_bit_value()
+  return self.bit_value
 end
 
 --- Sets the new bit value value.
--- @tparam bitValue number the new bitValue. Must be a number between 0
+-- @tparam bit_value number the new bit_value. Must be a number between 0
 -- and 255, both included.
 -- @raise an error if the new value is incorrect.
-function Cell:setBitValue(bitValue)
-  assert(bitValue >= 0 and bitValue < 256, "Incorrect bit value.")
-  self.bitValue = bitValue
+function Cell:set_bit_value(bit_value)
+  assert(bit_value >= 0 and bit_value < 256, "Incorrect bit value.")
+  self.bit_value = bit_value
 end
 
 --- Returns the type of the Cell.
 -- @treturn number the type assigned to this cell.
-function Cell:getType()
+function Cell:get_type()
   return self.type
 end
 
@@ -64,28 +64,26 @@ end
 -- @tparam number type the new type of the Cell. Must be 0 (for wall) or 1 (for
 -- floor).
 -- @raise an error if the type is incorrect.
-function Cell:setType(type)
-  if type < 1 or type > 2 then
-    error("Incorrect type, must be 1 (wall) or 2 (floor)", 2)
-  end
+function Cell:set_type(type)
+  assert(type >= 1 and type <= 2, "Incorrect type, must be 1 (wall) or 2 (floor)", 2)
   self.type = type
 end
 
 --- Returns the quad of the cell
 -- @treturn Quad a love2d quad associated to the corresponding tile of the Cell.
-function Cell:getQuad()
+function Cell:get_quad()
   return self.quad
 end
 
 --- Updates the tile of the Cell according to its atributes.
 -- @tparam[opt] number alt an specific alternative of tile. If it's not
 -- specified, a random variation will be selected.
-function Cell:updateQuad(alt)
+function Cell:update_quad(alt)
   -- If doesn't exist a representation of that cell
-  if Cell.quads[self.type][self.bitValue] then
-    self.quad = Cell.quads[self.type][self.bitValue]
+  if Cell.quads[self.type][self.bit_value] then
+    self.quad = Cell.quads[self.type][self.bit_value]
     [alt or math.random(
-      1, math.max(1, #Cell.quads[self.type][self.bitValue]))]
+      1, math.max(1, #Cell.quads[self.type][self.bit_value]))]
     else
       self.quad = Cell.quads[self.type][255][1]
     end

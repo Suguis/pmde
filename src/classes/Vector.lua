@@ -14,6 +14,30 @@ function Vector:new(x, y)
   }, self)
 end
 
+--- Returns the x coordinate of the Vector
+-- @treturn the x coordinate of the Vector
+function Vector:get_x()
+  return self.x
+end
+
+--- Changes the x coordinate of the Vector
+-- @tparam the new x coordinate of the Vector
+function Vector:set_x(x)
+  self.x = x
+end
+
+--- Returns the y coordinate of the Vector
+-- @treturn the y coordinate of the Vector
+function Vector:get_y()
+  return self.y
+end
+
+--- Changes the y coordinate of the Vector
+-- @tparam the new y coordinate of the Vector
+function Vector:set_y(y)
+  self.y = y
+end
+
 --- Allows to sum vectors with the + operator.
 --
 -- This metamethod sums the x and the y components of the vectors and returns
