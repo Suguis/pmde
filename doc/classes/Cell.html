@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Lua</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+<li><a href="#Metamethods">Metamethods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Animation.html">Animation</a></li>
+  <li><strong>Cell</strong></li>
+  <li><a href="../classes/Dungeon.html">Dungeon</a></li>
+  <li><a href="../classes/DungeonPokemon.html">DungeonPokemon</a></li>
+  <li><a href="../classes/DungeonPokemonPlayer.html">DungeonPokemonPlayer</a></li>
+  <li><a href="../classes/Floor.html">Floor</a></li>
+  <li><a href="../classes/MapView.html">MapView</a></li>
+  <li><a href="../classes/Vector.html">Vector</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/actions.html">actions</a></li>
+  <li><a href="../modules/globals.html">globals</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Cell</code></h1>
+<p>The minimum unit of a Floor.</p>
+<p></p>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Cell:new">Cell:new (type)</a></td>
+	<td class="summary">Creates a Cell.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Cell:getBitmaskValue">Cell:getBitmaskValue ()</a></td>
+	<td class="summary">Returns the bitmask value of the Cell.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Cell:setBitmaskValue">Cell:setBitmaskValue (number)</a></td>
+	<td class="summary">Sets the new bitmaskValue value.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Cell:getType">Cell:getType ()</a></td>
+	<td class="summary">Returns the type of the Cell.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Cell:setType">Cell:setType (type)</a></td>
+	<td class="summary">Sets the new type of this Cell.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Cell:getQuad">Cell:getQuad ()</a></td>
+	<td class="summary">Returns the quad of the cell</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Cell:updateQuad">Cell:updateQuad ([alt])</a></td>
+	<td class="summary">Updates the tile of the Cell according to its atributes.</td>
+	</tr>
+</table>
+<h2><a href="#Metamethods">Metamethods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Cell:__tostring">Cell:__tostring ()</a></td>
+	<td class="summary">Converts the object into a string with its information.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Cell:new"></a>
+    <strong>Cell:new (type)</strong>
+    </dt>
+    <dd>
+    Creates a Cell.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">type</span>
+            <span class="types"><span class="type">number</span></span>
+         the type of the Cell. Must be 0 (for wall) or 1 (for
+ floor).
+        </li>
+    </ul>
+
+
+    <h3>Raises:</h3>
+    an error if the type or the bitmaskValue are incorrect.
+
+
+
+</dd>
+    <dt>
+    <a name = "Cell:getBitmaskValue"></a>
+    <strong>Cell:getBitmaskValue ()</strong>
+    </dt>
+    <dd>
+    Returns the bitmask value of the Cell.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the bitmask value assigned to this Cell.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Cell:setBitmaskValue"></a>
+    <strong>Cell:setBitmaskValue (number)</strong>
+    </dt>
+    <dd>
+    Sets the new bitmaskValue value.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+            <span class="types"><span class="type">bitmaskValue</span></span>
+         the new bitmaskValue. Must be a number between 0
+ and 255, both included.
+        </li>
+    </ul>
+
+
+    <h3>Raises:</h3>
+    an error if the new value is incorrect.
+
+
+
+</dd>
+    <dt>
+    <a name = "Cell:getType"></a>
+    <strong>Cell:getType ()</strong>
+    </dt>
+    <dd>
+    Returns the type of the Cell.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">number</span></span>
+        the type assigned to this cell.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Cell:setType"></a>
+    <strong>Cell:setType (type)</strong>
+    </dt>
+    <dd>
+    Sets the new type of this Cell.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">type</span>
+            <span class="types"><span class="type">number</span></span>
+         the new type of the Cell. Must be 0 (for wall) or 1 (for
+ floor).
+        </li>
+    </ul>
+
+
+    <h3>Raises:</h3>
+    an error if the type is incorrect.
+
+
+
+</dd>
+    <dt>
+    <a name = "Cell:getQuad"></a>
+    <strong>Cell:getQuad ()</strong>
+    </dt>
+    <dd>
+    Returns the quad of the cell
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Quad</span></span>
+        a love2d quad associated to the corresponding tile of the Cell.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Cell:updateQuad"></a>
+    <strong>Cell:updateQuad ([alt])</strong>
+    </dt>
+    <dd>
+    Updates the tile of the Cell according to its atributes.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">alt</span>
+            <span class="types"><span class="type">number</span></span>
+         an specific alternative of tile. If it's not
+ specified, a random variation will be selected.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Metamethods"></a>Metamethods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Cell:__tostring"></a>
+    <strong>Cell:__tostring ()</strong>
+    </dt>
+    <dd>
+    Converts the object into a string with its information.
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        a string with the object information.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2019-04-24 20:12:01 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
