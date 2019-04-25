@@ -48,7 +48,7 @@ end
 -- corresponding instances.
 function MapView:update_instances()
   for i = 1, #self.floor.pokemons do
-    self.floor.pokemons[i]:move_draw(self.pos * -globals.CELL_SIZE)
+    self.floor.pokemons[i]:move_draw_pos(self.pos * -globals.CELL_SIZE)
   end
 end
 

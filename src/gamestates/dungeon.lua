@@ -1,5 +1,7 @@
 local s = _C.GameState:new()
 
+local actions = require "src.modules.actions"
+
 local player
 local dungeon
 local view
@@ -25,8 +27,8 @@ function s.draw()
 end
 
 function s.keypressed(key, scancode, isrepeat)
-  local action = globals.actions.get_action(key)
-  local vector = globals.actions.get_move_vector(action)
+  local action = actions.get_action(key)
+  local vector = actions.get_move_vector(action)
   if vector then
     view:move(vector)
   end

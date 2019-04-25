@@ -11,7 +11,6 @@ globals = {
   TILES_DISPLAY_HEIGHT = 8,  -- The number of tile rows that can be displayed.
   time = 0,  -- the time passed in seconds since the beggining of the game.
   frames = 0,  -- the frames passed since the beggining of the game.
-  actions = require "src.actions"
 }
 
 return globals

@@ -8,7 +8,7 @@ Cell.__index = Cell
 Cell.quads = {}  -- A table to save all cell quads in the form: quads[type][bitvalue][alt]
 
 -- We use bitdef table data to make Cell.quads.
-local bitdef = require "src.bitdef"
+local bitdef = require "src.modules.bitdef"
 for t = 1, #bitdef do
   Cell.quads[t] = {}
   for bit = 0, 255 do

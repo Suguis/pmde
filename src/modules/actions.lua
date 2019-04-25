@@ -1,4 +1,6 @@
 --- Module that contains associations between inputs and actions.
+-- An action is a definition to a key press. One action can be associated to a
+-- multiple keys, and these can be changed easily, without change the entire code.
 -- @module actions
 local keys = {}
 
@@ -23,7 +25,6 @@ end
 -- @tparam string moveAction the action that represents a direction.
 -- @treturn Vector the unit Vector of the direction, or nil if the action is not
 -- a move action.
--- @see Vector
 function keys.get_move_vector(moveAction)
   if moveAction == keys.actions.up then
     return _C.Vector:new(0, -1)

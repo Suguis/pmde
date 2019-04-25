@@ -9,7 +9,7 @@ DungeonPokemonPlayer.__index = DungeonPokemonPlayer
 -- @tparam number level the level.
 -- @tparam Vector position the Vector that represents the position.
 -- @tparam[opt=1] number current_floor the floor on which the player is.
-function DungeonPokemonPlayer:new(number, level, position, current_floor)
+function DungeonPokemonPlayer:new(number, level, position, current_floor) -- TODO: Add a MapView parameter to the player
   local sprite_frame_data = {
     [1] = 38,
     [2] = 9,
@@ -23,7 +23,7 @@ function DungeonPokemonPlayer:new(number, level, position, current_floor)
     number = number,
     level = level,
     position = position,
-    draw_position = _C.Vector:new(position.x, position.y),
+    draw_position = _C.Vector:new(position:get_x(), position:get_y()),
     current_floor = current_floor or 1
   }, self)
 end

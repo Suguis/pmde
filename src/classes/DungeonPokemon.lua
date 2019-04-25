@@ -10,15 +10,15 @@ DungeonPokemon.__index = DungeonPokemon
 -- @tparam Vector position the Vector that represents the position.
 function DungeonPokemon:new(number, level, position)
   return setmetatable({
-    animation = animation,
+    -- animation = animation,
     number = number,
     level = level,
     position = position,
-    drawPosition = position and _C.Vector:new(position.x, position.y) or nil
+    drawPosition = position and _C.Vector:new(position:get_x(), position:get_y()) or nil
   }, self)
 end
 
-function DungeonPokemon:getPosition()
+function DungeonPokemon:get_position()
   return self.position
 end
 
@@ -32,19 +32,19 @@ function DungeonPokemon:update()
 end
 
 --- Sets the Pokémon draw position
-function DungeonPokemon:moveDraw(pos)
-  self.drawPosition = self.position + pos
+function DungeonPokemon:move_draw_pos(pos)
+  self.draw_position = self.position + pos
 end
 
 --- Draws the Pokémon
 function DungeonPokemon:draw()
-  self.animation:draw(self.drawPosition)
+  self.animation:draw(self.draw_position)
 end
 
 function DungeonPokemon:__tostring()
   return string.format(
       "DungeonPokemon = {number = %d, level = %d, position = (%d, %d)}",
-      self.number, self.level, self.position.x, self.position.y)
+      self.number, self.level, self.position:get_x(), self.position:get_y())
 end
 
 return DungeonPokemon
