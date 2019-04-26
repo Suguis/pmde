@@ -14,7 +14,7 @@ function DungeonPokemon:new(number, level, position)
     number = number,
     level = level,
     position = position,
-    drawPosition = position and _C.Vector:new(position:get_x(), position:get_y()) or nil
+    draw_position = position and _C.Vector:new(position:get_x(), position:get_y()) or nil
   }, self)
 end
 
@@ -22,8 +22,8 @@ function DungeonPokemon:get_position()
   return self.position
 end
 
-function DungeonPokemon:move(moveVector)
-  self.position = self.position + moveVector
+function DungeonPokemon:move(move_vector)
+  self.position = self.position + move_vector
 end
 
 --- Updates the animation

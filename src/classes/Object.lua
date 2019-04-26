@@ -1,3 +1,4 @@
+-- The class from which all the others inherit.
 local Object = {}
 Object.__index = Object
 

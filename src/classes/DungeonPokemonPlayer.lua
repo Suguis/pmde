@@ -1,14 +1,13 @@
---- A class that represents a player into a dungeon.
--- Derived from `DungeonPokemon`.
+--- A class that represents a player into a Dungeon.
 -- @classmod DungeonPokemonPlayer
 local DungeonPokemonPlayer = _C.DungeonPokemon:new()
 DungeonPokemonPlayer.__index = DungeonPokemonPlayer
 
 --- Creates a new DungeonPokemonPlayer.
--- @tparam number number the Pok√©Dex number of the Pok√©mon.
+-- @tparam number number the PokÈDex number of the PokÈmon.
 -- @tparam number level the level.
 -- @tparam Vector position the Vector that represents the position.
--- @tparam[opt=1] number current_floor the floor on which the player is.
+-- @tparam[opt=1] number current_floor the Floor on which the player is.
 function DungeonPokemonPlayer:new(number, level, position, current_floor) -- TODO: Add a MapView parameter to the player
   local sprite_frame_data = {
     [1] = 38,
@@ -34,7 +33,7 @@ function DungeonPokemonPlayer:get_current_floor()
   return self.current_floor
 end
 
---- Converts the object into a string with its information.
+--- Converts the DungeonPokemonPlayer into a string with its information.
 -- @treturn string a string with the object information.
 function DungeonPokemonPlayer:__tostring()
   return string.format(

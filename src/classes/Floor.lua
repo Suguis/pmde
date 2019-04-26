@@ -1,4 +1,4 @@
---- A randomly generated floor with items and PokÃ©mon.
+--- A randomly generated Floor with items and Pokémon.
 -- @classmod Floor
 local Floor = _C.Object:new()
 Floor.__index = Floor
@@ -6,13 +6,15 @@ Floor.__index = Floor
 local bit = require "bit"
 
 -- Static variables
+
+--- A cell that represents all cells outside the Dungeon. It is unbreakable.
 Floor.void_cell = _C.Cell:new(1)
 Floor.void_cell:set_bit_value(255)
 
---- Creates a new randomly generated floor.
--- @tparam number width the width of the floor, in cells.
--- @tparam number height the height of the floor, in cells.
--- @treturn Floor a new randomly generated floor
+--- Creates a new randomly generated Floor.
+-- @tparam number width the width of the Floor, in cells.
+-- @tparam number height the height of the Floor, in cells.
+-- @treturn Floor a new randomly generated Floor
 function Floor:new(width, height)
   local grid
 
@@ -48,7 +50,7 @@ end
 --- Returns the cell at a specified position.
 -- @tparam number x the x coordinate.
 -- @tparam number y the y coordinate.
--- @treturn Cell the cell at the specified position, or void_cell if the cell
+-- @treturn Cell the Cell at the specified position, or void_cell if the Cell
 -- doesn't exists.
 function Floor:get_cell(x, y)
   return self.grid[x] and self.grid[x][y] or Floor.void_cell

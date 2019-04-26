@@ -6,7 +6,7 @@ MapView.__index = MapView
 local mfloor = math.floor
 
 --- Creates a new MapView.
--- @tparam Vector pos the vector of the coordinates that the MapView is going to
+-- @tparam Vector pos the Vector of the coordinates that the MapView is going to
 -- put in the center.
 -- @tparam Floor floor the Floor on which the MapView is going to focus.
 -- @tparam Image tileset the Image that the MapView buffer is going to use.
@@ -65,7 +65,7 @@ function MapView:update()
   self.batch:flush()
 end
 
---- Draws the cells of the floor
+--- Draws the cells of the Floor
 -- @tparam Texture the Texture from which the tiles are drawn
 function MapView:draw()
   love.graphics.draw(self.batch,

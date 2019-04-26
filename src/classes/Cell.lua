@@ -1,11 +1,13 @@
---- The minimum unit of a Floor.
+--- The minimum unit of a floor object.
 -- @classmod Cell
 local Cell = _C.Object:new()
 Cell.__index = Cell
 
 
 -- Static atributes
-Cell.quads = {}  -- A table to save all cell quads in the form: quads[type][bitvalue][alt]
+
+--- A table to save all Cell quads in the form: Cell.quads[type][bitvalue][alt]
+Cell.quads = {}
 
 -- We use bitdef table data to make Cell.quads.
 local bitdef = require "src.modules.bitdef"
@@ -40,13 +42,13 @@ function Cell:new(type)
 end
 
 --- Returns the bit value value of the Cell.
--- @treturn number the bit value value assigned to this Cell.
+-- @treturn number the bit value value assigned to this csell.
 function Cell:get_bit_value()
   return self.bit_value
 end
 
 --- Sets the new bit value value.
--- @tparam bit_value number the new bit_value. Must be a number between 0
+-- @tparam number bit_value the new bit_value. Must be a number between 0
 -- and 255, both included.
 -- @raise an error if the new value is incorrect.
 function Cell:set_bit_value(bit_value)
@@ -55,7 +57,7 @@ function Cell:set_bit_value(bit_value)
 end
 
 --- Returns the type of the Cell.
--- @treturn number the type assigned to this cell.
+-- @treturn number the type assigned to this Cell.
 function Cell:get_type()
   return self.type
 end
@@ -69,7 +71,7 @@ function Cell:set_type(type)
   self.type = type
 end
 
---- Returns the quad of the cell
+--- Returns the quad of the Cell
 -- @treturn Quad a love2d quad associated to the corresponding tile of the Cell.
 function Cell:get_quad()
   return self.quad
@@ -79,7 +81,7 @@ end
 -- @tparam[opt] number alt an specific alternative of tile. If it's not
 -- specified, a random variation will be selected.
 function Cell:update_quad(alt)
-  -- If doesn't exist a representation of that cell
+  -- If doesn't exist a representation of that Cell
   if Cell.quads[self.type][self.bit_value] then
     self.quad = Cell.quads[self.type][self.bit_value]
     [alt or math.random(

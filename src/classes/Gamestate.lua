@@ -1,6 +1,14 @@
+--- A Gamestate is a part of the game that consists in a differentiated
+-- part of the game, compared to other gamestates (for example, a main menu
+-- Gamestate or a in-dungeon Gamestate). They have their unique callbacks.
+--
+-- Gamestates need to be implemented into the gamestates/ folder.
+-- @classmod Gamestate
 local Gamestate = _C.Object:new()
 Gamestate.__index = Gamestate
 
+--- Creates a new Gamestate
+-- @treturn Gamestate the new Gamestate
 function Gamestate:new()
   return setmetatable({id = nil}, self)
 end
@@ -21,7 +29,8 @@ end
 function Gamestate.keyreleased()
 end
 
-
+--- Converts the object into a string with its information.
+-- @treturn string a string with the object information.
 function Gamestate:__tostring()
   return string.format("Gamestate = {id = %s}", self.id)
 end

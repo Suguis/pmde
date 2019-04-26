@@ -1,9 +1,10 @@
---- @classmod Animation
+--- An Animation to represent a moving image
+-- @classmod Animation
 local Animation = _C.Object:new()
 Animation.__index = Animation
 
---- Creates an animation.
--- @tparam path the patch to the spritesheet.
+--- Creates an Animation.
+-- @tparam string path the patch to the spritesheet.
 -- @tparam number width the width of the sprite.
 -- @tparam number height the height of the sprite.
 -- @tparam table frames_duration a table with ordered numeric keys from 1 to the number
@@ -34,7 +35,7 @@ function Animation:new(path, width, height, frames_duration)
   }, self)
 end
 
---- Updates the animation internal parameters to show the correct sprite
+--- Updates the Animation internal parameters to show the correct sprite
 -- on callback draw.
 function Animation:update()
   if self.current_frame == self.sprites[self.current_sprite].end_frame then
@@ -45,8 +46,8 @@ function Animation:update()
   self.current_frame = (globals.frames % self.duration) + 1
 end
 
---- Draws the current sprite of the animation.
--- @tparam Vector pos the position to draw the animation.
+--- Draws the current sprite of the Animation.
+-- @tparam Vector pos the position to draw the Animation.
 function Animation:draw(pos)
   love.graphics.draw(self.texture, self.sprites[self.current_sprite].quad,
       pos:get_x(), pos:get_y())
