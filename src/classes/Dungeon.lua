@@ -46,6 +46,11 @@ function Dungeon:get_view()
     return self.view
 end
 
+--- Draws the MapView of the dungeon, and the Pokemon and the Items of it's floor (the MapView's floor).
+function Dungeon:draw()
+    self.view:draw()
+end
+
 --- Converts the object into a string with its information.
 --- @return string a string with the object information.
 function Dungeon:__tostring()

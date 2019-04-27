@@ -64,6 +64,7 @@ local bit_values = {
     [0] = {[-1] = 1, [0] = 0, [1] = 16},
     [1] = {[-1] = 2, [0] = 4, [1] = 8}
 }
+
 --- Updates the bit value of all cells.
 function Floor:update_bit_values()
     local new_value

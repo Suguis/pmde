@@ -13,7 +13,10 @@ function DungeonPokemon:new(number, level, position)
             number = number,
             level = level,
             position = position,
-            draw_position = position and _C.Vector:new(position:get_x(), position:get_y()) or nil
+            step_current_frames = 0,
+            step_total_frames = 12, -- 24 if normal speed
+            step_vector = nil, -- Vector that the player moves each step
+            step_final_pos = nil -- Vector that will equals DungeonPokemon pos when it finishes the move
         },
         self
     )
@@ -25,25 +28,31 @@ function DungeonPokemon:get_position()
     return self.position
 end
 
---- Moves the DungeonPokemon
+--- Begins the move of the DungeonPokemon
 --- @param move_vector Vector the displacement Vector.
-function DungeonPokemon:move(move_vector)
-    self.position = self.position + move_vector
+function DungeonPokemon:move(dv)
+    self.step_vector = dv / self.step_total_frames
+    self.step_final_pos = self.position + dv
 end
 
---- Updates the animation.
+--- Updates the animation and continues any active movement.
 function DungeonPokemon:update()
     self.animation:update()
-end
-
---- Sets the Pokémon draw position.
-function DungeonPokemon:move_draw_pos(pos)
-    self.draw_position = self.position + pos
+    if self.step_vector then -- If is moving
+        self.position = self.position + self.step_vector
+        self.step_current_frames = self.step_current_frames + 1
+        if self.step_current_frames == self.step_total_frames then
+            self.step_current_frames = 0
+            self.step_vector = nil
+            self.position = self.step_final_pos
+            self.step_final_pos = nil
+        end
+    end
 end
 
 --- Draws the Pokémon.
-function DungeonPokemon:draw()
-    self.animation:draw(self.draw_position)
+function DungeonPokemon:draw(pos)
+    self.animation:draw(pos)
 end
 
 --- Converts the DungeonPokemonPlayer into a string with its information.

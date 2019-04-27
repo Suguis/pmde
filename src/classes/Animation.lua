@@ -11,10 +11,12 @@ Animation.__index = Animation
 --- @return Animation the new Animation.
 function Animation:new(path, width, height, frames_duration)
     local duration = 0
-    local texture = love.graphics.newImage(path)
+    local texture = path and love.graphics.newImage(path)
     local sprites = {}
     local current_frame = 1
     local current_sprite = 1
+
+    frames_duration = frames_duration or {} -- To allow inherit from DungeonAnimation without errors
 
     for i = 1, #frames_duration do
         duration = duration + frames_duration[i]
