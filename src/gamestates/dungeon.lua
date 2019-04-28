@@ -16,7 +16,7 @@ end
 
 function s.update(dt)
     player:update(dt)
-    dungeon:get_view():update()
+    dungeon:get_view():update(dt)
 end
 
 function s.draw()
@@ -26,7 +26,7 @@ end
 function s.keypressed(key, scancode, isrepeat)
     local action = actions.get_action(key)
     local vector = actions.get_move_vector(action)
-    if vector then
+    if vector and not player:is_moving() then
         dungeon:get_view():move(vector)
         player:move(vector)
     end

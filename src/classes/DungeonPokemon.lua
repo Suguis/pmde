@@ -2,6 +2,9 @@
 local DungeonPokemon = _C.Pokemon:new()
 DungeonPokemon.__index = DungeonPokemon
 
+-- Static atributes
+DungeonPokemon.move_total_time = 12 / 60 -- the time that requires the move to be executed
+
 --- Creates a new DungeonPokemonPlayer.
 --- @param number number the PokéDex number of the Pokémon.
 --- @param level number the level.
@@ -13,10 +16,9 @@ function DungeonPokemon:new(number, level, position)
             number = number,
             level = level,
             position = position,
-            step_current_frames = 0,
-            step_total_frames = 12, -- 24 if normal speed
-            step_vector = nil, -- Vector that the player moves each step
-            step_final_pos = nil -- Vector that will equals DungeonPokemon pos when it finishes the move
+            move_current_time = 0, -- The time passed since the beggining of the move.
+            move_vector = nil, -- Vector that the player moves each frame. Depends on the delta time
+            move_final_pos = nil -- Vector that will equals DungeonPokemon pos when it finishes the move
         },
         self
     )
@@ -31,23 +33,30 @@ end
 --- Begins the move of the DungeonPokemon
 --- @param move_vector Vector the displacement Vector.
 function DungeonPokemon:move(dv)
-    self.step_vector = dv / self.step_total_frames
-    self.step_final_pos = self.position + dv
+    self.move_final_pos = self.position + dv
+    self.move_vector = dv
 end
 
+function DungeonPokemon:is_moving()
+    if self.move_vector then
+        return true
+    else
+        return false
+    end
+end
 --- Updates the animation and continues any active movement.
-function DungeonPokemon:update()
-    self.animation:update()
-    if self.step_vector then -- If is moving
-        self.position = self.position + self.step_vector
-        self.step_current_frames = self.step_current_frames + 1
-        if self.step_current_frames == self.step_total_frames then
-            self.step_current_frames = 0
-            self.step_vector = nil
-            self.position = self.step_final_pos
-            self.step_final_pos = nil
+function DungeonPokemon:update(dt)
+    if self:is_moving() then -- If is moving
+        self.position = self.position + self.move_vector * dt / self.move_total_time
+        self.move_current_time = self.move_current_time + dt
+        if self.move_current_time >= self.move_total_time then
+            self.move_current_time = 0
+            self.move_vector = nil
+            self.position = self.move_final_pos
+            self.move_final_pos = nil
         end
     end
+    self.animation:update(dt)
 end
 
 --- Draws the Pokémon.

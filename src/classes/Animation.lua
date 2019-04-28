@@ -6,15 +6,13 @@ Animation.__index = Animation
 --- @param path string the patch to the spritesheet.
 --- @param number width the width of the sprite.
 --- @param height number the height of the sprite.
---- @param frames_duration table<number, table<Quad, number>> a table with keys from 1 to the number of sprites.
+--- @param frames_duration table<number, number> a table with keys from 1 to the number of sprites.
 --- Each key must have the duration of its sprite, in frames.
 --- @return Animation the new Animation.
 function Animation:new(path, width, height, frames_duration)
     local duration = 0
     local texture = path and love.graphics.newImage(path)
     local sprites = {}
-    local current_frame = 1
-    local current_sprite = 1
 
     frames_duration = frames_duration or {} -- To allow inherit from DungeonAnimation without errors
 
@@ -22,7 +20,7 @@ function Animation:new(path, width, height, frames_duration)
         duration = duration + frames_duration[i]
         sprites[i] = {
             quad = love.graphics.newQuad(width * (i - 1), 0, width, height, texture:getWidth(), texture:getHeight()),
-            end_frame = duration
+            end_frame = duration / 60
         }
     end
 
@@ -30,9 +28,9 @@ function Animation:new(path, width, height, frames_duration)
         {
             texture = texture,
             sprites = sprites,
-            current_sprite = current_sprite,
-            current_frame = current_frame,
-            duration = duration
+            current_sprite = 1,
+            current_time = 0,
+            duration = duration / 60
         },
         self
     )
@@ -40,12 +38,12 @@ end
 
 --- Updates the Animation internal parameters to show the correct sprite
 -- on callback draw.
-function Animation:update()
-    if self.current_frame == self.sprites[self.current_sprite].end_frame then
+function Animation:update(dt)
+    if self.current_time >= self.sprites[self.current_sprite].end_frame then
         self.current_sprite = self.current_sprite == #self.sprites and 1 or self.current_sprite + 1
     end
 
-    self.current_frame = (globals.frames % self.duration) + 1
+    self.current_time = self.current_time > self.duration and 0 or self.current_time + dt
 end
 
 --- Draws the current sprite of the Animation.
