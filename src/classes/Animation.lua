@@ -10,6 +10,8 @@ Animation.__index = Animation
 --- Each key must have the duration of its sprite, in frames.
 --- @return Animation the new Animation.
 function Animation:new(path, width, height, frames_duration)
+    local new = setmetatable(_C.Object:new(), self)
+
     local duration = 0
     local texture = path and love.graphics.newImage(path)
     local sprites = {}
@@ -24,16 +26,13 @@ function Animation:new(path, width, height, frames_duration)
         }
     end
 
-    return setmetatable(
-        {
-            texture = texture,
-            sprites = sprites,
-            current_sprite = 1,
-            current_time = 0,
-            duration = duration / 60
-        },
-        self
-    )
+    new.texture = texture
+    new.sprites = sprites
+    new.current_sprite = 1
+    new.current_time = 0
+    new.duration = duration / 60
+
+    return new
 end
 
 --- Updates the Animation internal parameters to show the correct sprite

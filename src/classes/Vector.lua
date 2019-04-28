@@ -7,13 +7,12 @@ Vector.__index = Vector
 --- @param y number the y component.
 --- @return Vector the new Vector object.
 function Vector:new(x, y)
-    return setmetatable(
-        {
-            x = x,
-            y = y
-        },
-        self
-    )
+    local new = setmetatable(_C.Object:new(), self)
+
+    new.x = x
+    new.y = y
+
+    return new
 end
 
 --- Returns the x coordinate of the Vector

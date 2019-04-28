@@ -10,18 +10,14 @@ DungeonPokemon.move_total_time = 12 / 60 -- the time that requires the move to b
 --- @param level number the level.
 --- @param position Vector the Vector that represents the position.
 function DungeonPokemon:new(number, level, position)
-    return setmetatable(
-        {
-            -- animation = animation,
-            number = number,
-            level = level,
-            position = position,
-            move_current_time = 0, -- The time passed since the beggining of the move.
-            move_vector = nil, -- Vector that the player moves each frame. Depends on the delta time
-            move_final_pos = nil -- Vector that will equals DungeonPokemon pos when it finishes the move
-        },
-        self
-    )
+    local new = setmetatable(_C.Pokemon:new(number, level), self)
+
+    new.position = position
+    new.move_current_time = 0 -- The time passed since the beggining of the move.
+    new.move_vector = nil -- Vector that the player moves each frame. Depends on the delta time
+    new.move_final_pos = nil -- Vector that will equals DungeonPokemon pos when it finishes the move
+
+    return new
 end
 
 --- Gets the position of the DungeonPokemon.

@@ -13,27 +13,24 @@ MapView.move_total_time = 12 / 60 -- 24 / 60 if normal speed
 --- @param tileset Image the Image that the MapView buffer is going to use.
 --- @return MapView the new MapView.
 function MapView:new(center, floor, tileset)
+    local new = setmetatable(_C.Object:new(), self)
+
     self.batch = love.graphics.newSpriteBatch(tileset, 512, "static") -- TODO: this needs to be static
 
-    local to_ret =
-        setmetatable(
-        {
-            center = center, -- The grid cell that the view is centering
-            position = _C.Vector:new( -- The position of the left-up corner
-                center.x - 1 - (love.graphics.getWidth() / 2 - globals.CELL_SIZE / 2) / (globals.CELL_SIZE),
-                center.y - 1 - (love.graphics.getHeight() / 2 - globals.CELL_SIZE / 2) / (globals.CELL_SIZE)
-            ),
-            floor = floor,
-            move_current_time = 0, -- The time passed since the beggining of the move.
-            move_vector = nil, -- Vector that the player moves each frame. Depends on the delta time
-            move_final_center = nil -- Vector that will equals DungeonPokemon pos when it finishes the move
-        },
-        self
+    new.center = center -- The grid cell that the view is centering
+    new.position =
+        _C.Vector:new( -- The position of the left-up corner
+        center.x - 1 - (love.graphics.getWidth() / 2 - globals.CELL_SIZE / 2) / (globals.CELL_SIZE),
+        center.y - 1 - (love.graphics.getHeight() / 2 - globals.CELL_SIZE / 2) / (globals.CELL_SIZE)
     )
+    new.floor = floor
+    new.move_current_time = 0 -- The time passed since the beggining of the move.
+    new.move_vector = nil -- Vector that the player moves each frame. Depends on the delta time
+    new.move_final_center = nil -- Vector that will equals DungeonPokemon pos when it finishes the move
 
-    to_ret:update_batch()
+    new:update_batch()
 
-    return to_ret
+    return new
 end
 
 --- Moves the view inmediately (not use outside the class)

@@ -15,39 +15,31 @@ Floor.void_cell:set_bit_value(255)
 --- @param height number the height of the Floor, in cells.
 --- @return Floor a new randomly generated Floor
 function Floor:new(width, height)
-    local grid
+    local new = setmetatable(_C.Object:new(), self)
 
-    local g = {
+    local grid = {
         {2, 2, 2},
         {2, 2, 2},
         {2, 2, 2}
     }
 
-    for i = 1, #g do
-        for j = 1, #g[i] do
+    for i = 1, #grid do
+        for j = 1, #grid[i] do
             local c = _C.Cell:new(math.random(1, 2))
-            c:set_type(g[i][j])
-            g[i][j] = c
+            c:set_type(grid[i][j])
+            grid[i][j] = c
         end
     end
 
-    grid = g
+    new.width = width
+    new.height = height
+    new.grid = grid
+    new.pokemons = {}
+    new.items = {}
 
-    local toRet =
-        setmetatable(
-        {
-            width = width,
-            height = height,
-            grid = grid,
-            pokemons = {},
-            items = {}
-        },
-        self
-    )
+    new:update_bit_values()
 
-    toRet:update_bit_values()
-
-    return toRet
+    return new
 end
 
 --- Returns the cell at a specified position.

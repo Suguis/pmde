@@ -8,29 +8,23 @@ DungeonPokemonPlayer.__index = DungeonPokemonPlayer
 --- @param position Vector the Vector that represents the position.
 --- @param current_floor number the Floor on which the player is.
 function DungeonPokemonPlayer:new(number, level, position, current_floor)
+    local new = setmetatable(_C.Pokemon:new(number, level, position), self)
+
     local sprite_frame_data = {
         [1] = 38,
         [2] = 9,
         [3] = 9
     }
 
-    return setmetatable(
-        {
-            number = number,
-            level = level,
-            position = position,
-            current_floor = current_floor or 1,
-            draw_position = _C.Vector:new(position:get_x(), position:get_y()),
-            animation = _C.DungeonAnimation:new(
-                "res/animations/258/idle/down.png",
-                32,
-                32,
-                sprite_frame_data,
-                _C.Vector:new(6, 0)
-            ) -- TODO: Mover el parametro animation a DungeonPokemon, y hacer que se cargue el sprite indicado según el número, igual con el sprite_frame_data, que se cargue desde un archivo automáticamente.
-        },
-        self
-    )
+    new.number = number
+    new.level = level
+    new.position = position
+    new.current_floor = current_floor or 1
+    new.draw_position = _C.Vector:new(position:get_x(), position:get_y())
+    new.animation =
+        _C.DungeonAnimation:new("res/animations/258/idle/down.png", 32, 32, sprite_frame_data, _C.Vector:new(6, 0)) -- TODO: Mover el parametro animation a DungeonPokemon, y hacer que se cargue el sprite indicado según el número, igual con el sprite_frame_data, que se cargue desde un archivo automáticamente.
+
+    return new
 end
 
 --- Returns the floor on which the player is.

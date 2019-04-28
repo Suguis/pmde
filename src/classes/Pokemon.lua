@@ -1,7 +1,16 @@
 --- @class Pokemon a Pokemon, that consists in a Pokemon with it's PokeDex number, level,
--- species, moves... This is an abstract class, it has no `new` method.
+-- species, moves... This is an abstract class.
 local Pokemon = _C.Object:new()
 Pokemon.__index = Pokemon
+
+function Pokemon:new(number, level)
+    local new = setmetatable(_C.Object:new(), self)
+
+    new.number = number
+    new.level = level
+
+    return new
+end
 
 --- Converts the object into a string with its information.
 --- @return string a string with the object information.

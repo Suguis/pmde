@@ -10,17 +10,16 @@ GamestateManager.__index = GamestateManager
 --- @param first_gamestate string the name of the first gamestate to run.
 --- @return GamestateManager the new GamestateManager.
 function GamestateManager:new(gamestates, first_gamestate)
+    local new = setmetatable(_C.Object:new(), self)
+
     for i = 1, #gamestates do
         gamestates[i] = require("src.gamestates." .. gamestates[i])
     end
 
-    return setmetatable(
-        {
-            gamestates = gamestates,
-            current = gamestates[first_gamestate]
-        },
-        self
-    )
+    new.gamestates = gamestates
+    new.current = gamestates[first_gamestate]
+
+    return new
 end
 
 function GamestateManager:init()

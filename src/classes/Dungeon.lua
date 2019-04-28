@@ -10,21 +10,21 @@ Dungeon.__index = Dungeon
 --- @param tileset_id string the name of the tileset.
 --- @return Dungeon the new Dungeon.
 function Dungeon:new(name, total_floors, width, height, tileset_id)
+    local new = setmetatable(_C.Object:new(), self)
+
     local floors = {}
     for i = 1, total_floors do
         floors[i] = _C.Floor:new(width, height)
     end
 
     local tileset = love.graphics.newImage("res/tilesets/" .. tileset_id .. ".png")
-    return setmetatable(
-        {
-            name = name,
-            floors = floors,
-            tileset = tileset,
-            view = _C.MapView:new(_C.Vector:new(0, 0), floors[1], tileset)
-        },
-        self
-    )
+
+    new.name = name
+    new.floors = floors
+    new.tileset = tileset
+    new.view = _C.MapView:new(_C.Vector:new(0, 0), floors[1], tileset)
+
+    return new
 end
 
 --- Draws a floor of the Dungeon.

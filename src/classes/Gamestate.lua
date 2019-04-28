@@ -8,7 +8,11 @@ Gamestate.__index = Gamestate
 --- Creates a new Gamestate
 --- @return Gamestate the new Gamestate
 function Gamestate:new()
-    return setmetatable({id = nil}, self)
+    local new = setmetatable(_C.Object:new(), self)
+
+    new.id = nil
+
+    return new
 end
 
 function Gamestate.init()

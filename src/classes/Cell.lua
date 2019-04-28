@@ -37,13 +37,12 @@ end
 function Cell:new(type)
     assert(type >= 1 and type <= 2, "Incorrect type, must be 1 (wall) or 2 (floor)", 2)
 
-    return setmetatable(
-        {
-            type = type,
-            bit_value = nil
-        },
-        self
-    )
+    local new = setmetatable(_C.Object:new(), self)
+
+    new.type = type
+    new.bit_value = nil
+
+    return new
 end
 
 --- Returns the bit value value of the Cell.
