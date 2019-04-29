@@ -83,7 +83,7 @@ function MapView:update_batch()
     for x = 1, globals.TILES_DISPLAY_WIDTH do
         for y = 1, globals.TILES_DISPLAY_HEIGHT do
             self.batch:add(
-                self.floor:get_cell(x + mfloor(self.position.x), y + mfloor(self.position.y)):get_quad(),
+                self.floor:get_cell_inmediate(x + mfloor(self.position.x), y + mfloor(self.position.y)):get_quad(),
                 (x - 1) * globals.CELL_SIZE,
                 (y - 1) * globals.CELL_SIZE
             )

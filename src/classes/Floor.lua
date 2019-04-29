@@ -4,7 +4,12 @@ Floor.__index = Floor
 
 local bit = require "bit"
 
--- Static variables
+-- Static atributes
+Floor.bit_values = {
+    [-1] = {[-1] = 128, [0] = 64, [1] = 32},
+    [0] = {[-1] = 1, [0] = 0, [1] = 16},
+    [1] = {[-1] = 2, [0] = 4, [1] = 8}
+}
 
 --- A cell that represents all cells outside the Dungeon. It is unbreakable.
 Floor.void_cell = _C.Cell:new(1)
@@ -43,19 +48,22 @@ function Floor:new(width, height)
 end
 
 --- Returns the cell at a specified position.
+--- @param coordinates Vector the coordinates in vector form.
+--- @return Cell the Cell at the specified position, or void_cell if the Cell
+-- doesn't exists.
+function Floor:get_cell(coordinates)
+    local x, y = coordinates:get_x(), coordinates:get_y()
+    return self.grid[x] and self.grid[x][y] or Floor.void_cell
+end
+
+--- Returns the cell at a specified position.
 --- @param x number the x coordinate.
 --- @param y number the y coordinate.
 --- @return Cell the Cell at the specified position, or void_cell if the Cell
 -- doesn't exists.
-function Floor:get_cell(x, y)
+function Floor:get_cell_inmediate(x, y)
     return self.grid[x] and self.grid[x][y] or Floor.void_cell
 end
-
-local bit_values = {
-    [-1] = {[-1] = 128, [0] = 64, [1] = 32},
-    [0] = {[-1] = 1, [0] = 0, [1] = 16},
-    [1] = {[-1] = 2, [0] = 4, [1] = 8}
-}
 
 --- Updates the bit value of all cells.
 function Floor:update_bit_values()
@@ -69,26 +77,26 @@ function Floor:update_bit_values()
             new_value = 0
             for x = -1, 1 do
                 for y = -1, 1 do
-                    if self:get_cell(i + x, j + y):get_type() == self:get_cell(i, j):get_type() then
-                        new_value = bit.bor(new_value, bit_values[x][y])
+                    if self:get_cell_inmediate(i + x, j + y):get_type() == self:get_cell_inmediate(i, j):get_type() then
+                        new_value = bit.bor(new_value, self.bit_values[x][y])
                     end
                 end
             end
 
             -- If the cell doesnt exists (it's using the void_cell constant cell) we
             -- create a new cell on that position
-            if self:get_cell(i, j) == Floor.void_cell then
+            if self:get_cell_inmediate(i, j) == Floor.void_cell then
                 if new_value ~= 255 then
                     if not self.grid[i] then
                         self.grid[i] = {}
                     end
                     self.grid[i][j] = _C.Cell:new(1)
-                    self:get_cell(i, j):set_bit_value(new_value)
-                    self:get_cell(i, j):update_quad()
+                    self:get_cell_inmediate(i, j):set_bit_value(new_value)
+                    self:get_cell_inmediate(i, j):update_quad()
                 end
             else -- A cell that exists on the grid
-                self:get_cell(i, j):set_bit_value(new_value)
-                self:get_cell(i, j):update_quad()
+                self:get_cell_inmediate(i, j):set_bit_value(new_value)
+                self:get_cell_inmediate(i, j):update_quad()
             end
         end
     end

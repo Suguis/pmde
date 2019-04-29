@@ -15,7 +15,7 @@ function DungeonPokemon:new(number, level, position)
     new.position = position
     new.move_current_time = 0 -- The time passed since the beggining of the move.
     new.move_vector = nil -- Vector that the player moves each frame. Depends on the delta time
-    new.move_final_pos = nil -- Vector that will equals DungeonPokemon pos when it finishes the move
+    new.move_final_pos = position -- Vector that will equals DungeonPokemon pos when it finishes the move
 
     return new
 end
@@ -49,7 +49,6 @@ function DungeonPokemon:update(dt)
             self.move_current_time = 0
             self.move_vector = nil
             self.position = self.move_final_pos
-            self.move_final_pos = nil
         end
     end
     self.animation:update(dt)
@@ -67,8 +66,8 @@ function DungeonPokemon:__tostring()
         "DungeonPokemon = {number = %d, level = %d, position = (%d, %d)}",
         self.number,
         self.level,
-        self.position:get_x(),
-        self.position:get_y()
+        self.move_final_pos:get_x(),
+        self.move_final_pos:get_y()
     )
 end
 

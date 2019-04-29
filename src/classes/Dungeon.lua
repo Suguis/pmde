@@ -29,6 +29,7 @@ end
 
 --- Draws a floor of the Dungeon.
 --- @param floor number the number of the floor to draw (absolute value).
+--- @return Floor the floor of the number passed from argument.
 function Dungeon:get_floor(floor)
     assert(floor, "The floor doesn't exists")
     return self.floors[floor]

@@ -40,8 +40,8 @@ function DungeonPokemonPlayer:__tostring()
         "DungeonPokemonPlayer = {number = %d, level = %d, position = (%d, %d)}",
         self.number,
         self.level,
-        self.position:get_x(),
-        self.position:get_y()
+        self.move_final_pos:get_x(),
+        self.move_final_pos:get_y()
     )
 end
 

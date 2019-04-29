@@ -31,7 +31,7 @@ for t = 1, #bitdef do
 end
 
 --- Creates a Cell.
---- @param type number the type of the Cell. Must be 0 (for wall) or 1 (for
+--- @param type number the type of the Cell. Must be 1 (for wall) or 2 (for
 -- floor).
 -- @raise an error if the type or the bit_value are incorrect.
 function Cell:new(type)
