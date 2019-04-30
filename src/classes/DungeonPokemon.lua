@@ -1,5 +1,5 @@
 --- @class DungeonPokemon : Pokemon represents a Pokémon into a dungeon.
-local DungeonPokemon = _C.Pokemon:new()
+local DungeonPokemon = _C.Pokemon:new_void()
 DungeonPokemon.__index = DungeonPokemon
 
 -- Static atributes
@@ -18,6 +18,10 @@ function DungeonPokemon:new(number, level, position)
     new.move_final_pos = position -- Vector that will equals DungeonPokemon pos when it finishes the move
 
     return new
+end
+
+function DungeonPokemon:new_void()
+    return setmetatable(_C.Pokemon:new_void(), self)
 end
 
 --- Gets the position of the DungeonPokemon.

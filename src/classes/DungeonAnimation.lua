@@ -1,5 +1,5 @@
 --- @class DungeonAnimation : Animation an animation that represents graphically an instance of the dungeon
-local DungeonAnimation = _C.Animation:new()
+local DungeonAnimation = _C.Animation:new_void()
 DungeonAnimation.__index = DungeonAnimation
 
 --- Creates a DungeonAnimation, .
@@ -19,6 +19,10 @@ function DungeonAnimation:new(path, width, height, sprite_frame_data)
     )
 
     return new
+end
+
+function DungeonAnimation:new_void()
+    return setmetatable(_C.Animation:new_void(), self)
 end
 
 --- Draws the current sprite of the DungeonAnimation.

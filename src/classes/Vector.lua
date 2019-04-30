@@ -1,5 +1,5 @@
 --- @class Vector a Vector with two coordinates
-local Vector = _C.Object:new()
+local Vector = _C.Object:new_void()
 Vector.__index = Vector
 
 --- Creates a Vector.
@@ -13,6 +13,10 @@ function Vector:new(x, y)
     new.y = y
 
     return new
+end
+
+function Vector:new_void()
+    return setmetatable(_C.Object:new_void(), self)
 end
 
 --- Returns the x coordinate of the Vector

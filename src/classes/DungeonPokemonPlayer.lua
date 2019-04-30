@@ -1,5 +1,5 @@
 ---@class DungeonPokemonPlayer : DungeonPokemon a class that represents a player into a Dungeon.
-local DungeonPokemonPlayer = _C.DungeonPokemon:new()
+local DungeonPokemonPlayer = _C.DungeonPokemon:new_void()
 DungeonPokemonPlayer.__index = DungeonPokemonPlayer
 
 local inout = require "src.modules.inout"
@@ -10,7 +10,7 @@ local inout = require "src.modules.inout"
 --- @param position Vector the Vector that represents the position.
 --- @param current_floor number the Floor on which the player is.
 function DungeonPokemonPlayer:new(number, level, position, current_floor)
-    local new = setmetatable(_C.Pokemon:new(number, level, position), self)
+    local new = setmetatable(_C.DungeonPokemon:new(number, level, position), self)
 
     local animation_data = inout.read_animation("res/animations/" .. number .. "/idle/animation.lua")
 
@@ -24,6 +24,10 @@ function DungeonPokemonPlayer:new(number, level, position, current_floor)
     new.animation = _C.DungeonAnimation:new("res/animations/" .. number .. "/idle/down.png", 32, 32, sprite_frame_data) -- TODO: Mover el parametro animation a DungeonPokemon, y hacer que se cargue el sprite indicado según el número, igual con el sprite_frame_data, que se cargue desde un archivo automáticamente.
 
     return new
+end
+
+function DungeonPokemonPlayer:new_void()
+    return setmetatable(_C.DungeonPokemon:new_void(), self)
 end
 
 --- Returns the floor on which the player is.

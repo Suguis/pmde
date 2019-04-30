@@ -1,5 +1,5 @@
 --- @class Cell the minimum unit of a floor object.
-local Cell = _C.Object:new()
+local Cell = _C.Object:new_void()
 Cell.__index = Cell
 
 -- Static atributes
@@ -37,12 +37,16 @@ end
 function Cell:new(type)
     assert(type >= 1 and type <= 2, "Incorrect type, must be 1 (wall) or 2 (floor)", 2)
 
-    local new = setmetatable(_C.Object:new(), self)
+    local new = setmetatable(_C.Object:new_void(), self)
 
     new.type = type
     new.bit_value = nil
 
     return new
+end
+
+function Cell:new_void()
+    return setmetatable(_C.Object:new(), self)
 end
 
 --- Returns the bit value value of the Cell.

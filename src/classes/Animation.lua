@@ -1,5 +1,5 @@
 --- @class Animation : DungeonPokemonPlayer
-local Animation = _C.Object:new()
+local Animation = _C.Object:new_void()
 Animation.__index = Animation
 
 --- Creates an Animation.
@@ -13,17 +13,15 @@ function Animation:new(path, width, height, sprite_frame_data)
     local new = setmetatable(_C.Object:new(), self)
 
     local duration = 0
-    local texture = path and love.graphics.newImage(path)
+    local texture = love.graphics.newImage(path)
     local sprites = {}
 
-    if sprite_frame_data then -- To allow inherit from DungeonAnimation without errors
-        for i = 1, #sprite_frame_data.duration do
-            duration = duration + sprite_frame_data.duration[i]
-            sprites[i] = {
-                quad = love.graphics.newQuad(width * (i - 1), 0, width, height, texture:getWidth(), texture:getHeight()), -- luacheck: ignore
-                end_frame = duration / 60
-            }
-        end
+    for i = 1, #sprite_frame_data.duration do
+        duration = duration + sprite_frame_data.duration[i]
+        sprites[i] = {
+            quad = love.graphics.newQuad(width * (i - 1), 0, width, height, texture:getWidth(), texture:getHeight()),
+            end_frame = duration / 60
+        }
     end
 
     new.texture = texture
@@ -34,6 +32,10 @@ function Animation:new(path, width, height, sprite_frame_data)
     new.position = sprite_frame_data and sprite_frame_data.position
 
     return new
+end
+
+function Animation:new_void()
+    return setmetatable(_C.Object:new_void(), self)
 end
 
 --- Updates the Animation internal parameters to show the correct sprite

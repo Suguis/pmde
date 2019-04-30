@@ -1,6 +1,6 @@
 --- @class Pokemon a Pokemon, that consists in a Pokemon with it's PokeDex number, level,
 -- species, moves... This is an abstract class.
-local Pokemon = _C.Object:new()
+local Pokemon = _C.Object:new_void()
 Pokemon.__index = Pokemon
 
 function Pokemon:new(number, level)

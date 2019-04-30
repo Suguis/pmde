@@ -1,5 +1,5 @@
 --- @class Floor a randomly generated Floor with items and Pokémon.
-local Floor = _C.Object:new()
+local Floor = _C.Object:new_void()
 Floor.__index = Floor
 
 local bit = require "bit"
@@ -45,6 +45,10 @@ function Floor:new(width, height)
     new:update_bit_values()
 
     return new
+end
+
+function Floor:new_void()
+    return setmetatable(_C.Object:new_void(), self)
 end
 
 --- Returns the cell at a specified position.

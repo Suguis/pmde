@@ -2,7 +2,7 @@
 --- part of the game, compared to other gamestates (for example, a main menu
 --- Gamestate or a in-dungeon Gamestate). They have their unique callbacks.
 --. Gamestates need to be implemented into the gamestates/ folder.
-local Gamestate = _C.Object:new()
+local Gamestate = _C.Object:new_void()
 Gamestate.__index = Gamestate
 
 --- Creates a new Gamestate
@@ -13,6 +13,10 @@ function Gamestate:new()
     new.id = nil
 
     return new
+end
+
+function Gamestate:new_void()
+    return setmetatable(_C.Object:new_void(), self)
 end
 
 function Gamestate.init()

@@ -1,5 +1,5 @@
 --- @class Dungeon a Dungeon that contains floors and Pokémon
-local Dungeon = _C.Object:new()
+local Dungeon = _C.Object:new_void()
 Dungeon.__index = Dungeon
 
 --- Creates a new Dungeon
@@ -25,6 +25,10 @@ function Dungeon:new(name, total_floors, width, height, tileset_id)
     new.view = _C.MapView:new(_C.Vector:new(0, 0), floors[1], tileset)
 
     return new
+end
+
+function Dungeon:new_void()
+    return setmetatable(_C.Object:new_void(), self)
 end
 
 --- Draws a floor of the Dungeon.

@@ -2,7 +2,7 @@
 --- It has methods to change the current Gamestate. Love2d callbacks
 --- always call the GamestateManager callbacks, and these call the current
 --- Gamestate callbacks.
-local GamestateManager = _C.Object:new()
+local GamestateManager = _C.Object:new_void()
 GamestateManager.__index = GamestateManager
 
 --- Creates a new GamestateManager.
@@ -20,6 +20,10 @@ function GamestateManager:new(gamestates, first_gamestate)
     new.current = gamestates[first_gamestate]
 
     return new
+end
+
+function GamestateManager:new_void()
+    return setmetatable(_C.Object:new_void(), self)
 end
 
 function GamestateManager:init()

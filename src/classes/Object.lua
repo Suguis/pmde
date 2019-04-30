@@ -6,6 +6,10 @@ function Object:new()
     return setmetatable({}, self)
 end
 
+function Object:new_void()
+    return setmetatable({}, self)
+end
+
 --- Checks if `self` and `other` objects have same types,
 --- or share inherited types.
 --- @param object Object the object to compare

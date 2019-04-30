@@ -1,5 +1,5 @@
 --- @class MapView a MapView that shows a specific view of a Floor
-local MapView = _C.Object:new()
+local MapView = _C.Object:new_void()
 MapView.__index = MapView
 
 local mfloor = math.floor
@@ -31,6 +31,10 @@ function MapView:new(center, floor, tileset)
     new:update_batch()
 
     return new
+end
+
+function MapView:new_void()
+    return setmetatable(_C.Object:new_void(), self)
 end
 
 --- Moves the view inmediately (not use outside the class)
