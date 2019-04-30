@@ -9,8 +9,8 @@ DungeonAnimation.__index = DungeonAnimation
 --- @param frames_duration table<number, table<Quad, number>> a table with keys from 1 to the number of sprites.
 --- Each key must have the duration of its sprite, in frames.
 --- @return Animation the new Animation.
-function DungeonAnimation:new(path, width, height, frames_duration)
-    local new = setmetatable(_C.Animation:new(path, width, height, frames_duration), self)
+function DungeonAnimation:new(path, width, height, sprite_frame_data)
+    local new = setmetatable(_C.Animation:new(path, width, height, sprite_frame_data), self)
 
     new.offset = -- TODO: careful, this is not correct for big sprites (Gyarados, Zapdos...)
         _C.Vector:new(

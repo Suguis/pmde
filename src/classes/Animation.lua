@@ -9,21 +9,21 @@ Animation.__index = Animation
 --- @param frames_duration table<number, number> a table with keys from 1 to the number of sprites.
 --- Each key must have the duration of its sprite, in frames.
 --- @return Animation the new Animation.
-function Animation:new(path, width, height, frames_duration)
+function Animation:new(path, width, height, sprite_frame_data)
     local new = setmetatable(_C.Object:new(), self)
 
     local duration = 0
     local texture = path and love.graphics.newImage(path)
     local sprites = {}
 
-    frames_duration = frames_duration or {} -- To allow inherit from DungeonAnimation without errors
-
-    for i = 1, #frames_duration do
-        duration = duration + frames_duration[i]
-        sprites[i] = {
-            quad = love.graphics.newQuad(width * (i - 1), 0, width, height, texture:getWidth(), texture:getHeight()),
-            end_frame = duration / 60
-        }
+    if sprite_frame_data then -- To allow inherit from DungeonAnimation without errors
+        for i = 1, #sprite_frame_data.duration do
+            duration = duration + sprite_frame_data.duration[i]
+            sprites[i] = {
+                quad = love.graphics.newQuad(width * (i - 1), 0, width, height, texture:getWidth(), texture:getHeight()), -- luacheck: ignore
+                end_frame = duration / 60
+            }
+        end
     end
 
     new.texture = texture
@@ -31,6 +31,7 @@ function Animation:new(path, width, height, frames_duration)
     new.current_sprite = 1
     new.current_time = 0
     new.duration = duration / 60
+    new.position = sprite_frame_data and sprite_frame_data.position
 
     return new
 end

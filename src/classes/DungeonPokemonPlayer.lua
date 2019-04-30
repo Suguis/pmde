@@ -2,6 +2,8 @@
 local DungeonPokemonPlayer = _C.DungeonPokemon:new()
 DungeonPokemonPlayer.__index = DungeonPokemonPlayer
 
+local inout = require "src.modules.inout"
+
 --- Creates a new DungeonPokemonPlayer.
 --- @param number number the PokéDex number of the Pokémon.
 --- @param level number the level.
@@ -10,19 +12,16 @@ DungeonPokemonPlayer.__index = DungeonPokemonPlayer
 function DungeonPokemonPlayer:new(number, level, position, current_floor)
     local new = setmetatable(_C.Pokemon:new(number, level, position), self)
 
-    local sprite_frame_data = {
-        [1] = 38,
-        [2] = 9,
-        [3] = 9
-    }
+    local animation_data = inout.read_animation("res/animations/" .. number .. "/idle/animation.lua")
+
+    local sprite_frame_data = animation_data
 
     new.number = number
     new.level = level
     new.position = position
     new.current_floor = current_floor or 1
     new.draw_position = _C.Vector:new(position:get_x(), position:get_y())
-    new.animation =
-        _C.DungeonAnimation:new("res/animations/258/idle/down.png", 32, 32, sprite_frame_data, _C.Vector:new(6, 0)) -- TODO: Mover el parametro animation a DungeonPokemon, y hacer que se cargue el sprite indicado según el número, igual con el sprite_frame_data, que se cargue desde un archivo automáticamente.
+    new.animation = _C.DungeonAnimation:new("res/animations/" .. number .. "/idle/down.png", 32, 32, sprite_frame_data) -- TODO: Mover el parametro animation a DungeonPokemon, y hacer que se cargue el sprite indicado según el número, igual con el sprite_frame_data, que se cargue desde un archivo automáticamente.
 
     return new
 end

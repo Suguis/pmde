@@ -24,7 +24,7 @@ local function control_move(pokemon, vector)
 end
 
 function s.init()
-    player = _C.DungeonPokemonPlayer:new(1, 1, _C.Vector:new(1, 1))
+    player = _C.DungeonPokemonPlayer:new(258, 1, _C.Vector:new(1, 1))
 
     dungeon = _C.Dungeon:new("Test dungeon", 1, 48, 32, "tiny-woods")
     dungeon:get_view():set_center(player:get_position())

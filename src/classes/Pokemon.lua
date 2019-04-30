@@ -12,6 +12,10 @@ function Pokemon:new(number, level)
     return new
 end
 
+function Pokemon:new_void()
+    return setmetatable(_C.Object:new_void(), self)
+end
+
 --- Converts the object into a string with its information.
 --- @return string a string with the object information.
 function Pokemon:__tostring()

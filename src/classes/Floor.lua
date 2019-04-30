@@ -51,8 +51,8 @@ end
 --- @param x number the x coordinate.
 --- @param y number the y coordinate.
 --- @return Cell the Cell at the specified position, or void_cell if the Cell
--- doesn't exists.
----@overload fun(coordinates:Vector):Cell
+--- doesn't exists.
+--- @overload fun(coordinates:Vector):Cell
 function Floor:get_cell(x, y)
     if type(x) == "table" then -- Overload
         local coordinates = x
