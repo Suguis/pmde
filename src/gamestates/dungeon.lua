@@ -11,11 +11,10 @@ local dungeon = nil
 --- @param pokemon DungeonPokemon the Pokemon to move.
 --- @param vector Vector the displacement vector.
 local function control_move(pokemon, vector)
-    -- We use player to control the floor because the game will always be in the player floor.
+    -- We use player to control the floor because the game will always be in the player floor
     if dungeon:get_floor(player:get_current_floor()):get_cell(pokemon:get_position() + vector):get_type() == 2 then
         if not pokemon:is_moving() then
             pokemon:move(vector)
-            print(pokemon)
         end
 
         if not dungeon:get_view():is_moving() then

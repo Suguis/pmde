@@ -48,20 +48,16 @@ function Floor:new(width, height)
 end
 
 --- Returns the cell at a specified position.
---- @param coordinates Vector the coordinates in vector form.
---- @return Cell the Cell at the specified position, or void_cell if the Cell
--- doesn't exists.
-function Floor:get_cell(coordinates)
-    local x, y = coordinates:get_x(), coordinates:get_y()
-    return self.grid[x] and self.grid[x][y] or Floor.void_cell
-end
-
---- Returns the cell at a specified position.
 --- @param x number the x coordinate.
 --- @param y number the y coordinate.
 --- @return Cell the Cell at the specified position, or void_cell if the Cell
 -- doesn't exists.
-function Floor:get_cell_inmediate(x, y)
+---@overload fun(coordinates:Vector):Cell
+function Floor:get_cell(x, y)
+    if type(x) == "table" then -- Overload
+        local coordinates = x
+        x, y = coordinates:get_x(), coordinates:get_y()
+    end
     return self.grid[x] and self.grid[x][y] or Floor.void_cell
 end
 
@@ -77,7 +73,7 @@ function Floor:update_bit_values()
             new_value = 0
             for x = -1, 1 do
                 for y = -1, 1 do
-                    if self:get_cell_inmediate(i + x, j + y):get_type() == self:get_cell_inmediate(i, j):get_type() then
+                    if self:get_cell(i + x, j + y):get_type() == self:get_cell(i, j):get_type() then
                         new_value = bit.bor(new_value, self.bit_values[x][y])
                     end
                 end
@@ -85,18 +81,18 @@ function Floor:update_bit_values()
 
             -- If the cell doesnt exists (it's using the void_cell constant cell) we
             -- create a new cell on that position
-            if self:get_cell_inmediate(i, j) == Floor.void_cell then
+            if self:get_cell(i, j) == Floor.void_cell then
                 if new_value ~= 255 then
                     if not self.grid[i] then
                         self.grid[i] = {}
                     end
                     self.grid[i][j] = _C.Cell:new(1)
-                    self:get_cell_inmediate(i, j):set_bit_value(new_value)
-                    self:get_cell_inmediate(i, j):update_quad()
+                    self:get_cell(i, j):set_bit_value(new_value)
+                    self:get_cell(i, j):update_quad()
                 end
             else -- A cell that exists on the grid
-                self:get_cell_inmediate(i, j):set_bit_value(new_value)
-                self:get_cell_inmediate(i, j):update_quad()
+                self:get_cell(i, j):set_bit_value(new_value)
+                self:get_cell(i, j):update_quad()
             end
         end
     end
