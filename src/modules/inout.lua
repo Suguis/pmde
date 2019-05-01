@@ -12,7 +12,7 @@ end
 --- Reads the animation data from a file
 --- @param file string the path to the file
 --- @return table the animation data
-function inout.read_animation(file)
+function inout.read_animation_data(file)
     read_data = {}
     loadfile(file, nil, animation_env)()
     return read_data

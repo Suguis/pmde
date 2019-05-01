@@ -1,4 +1,5 @@
 animation {
+    ["start"] = 40,
     ["duration"] = {
         [1] = 39,
         [2] = 2,

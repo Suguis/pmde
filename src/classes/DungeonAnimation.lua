@@ -4,13 +4,11 @@ DungeonAnimation.__index = DungeonAnimation
 
 --- Creates a DungeonAnimation, .
 --- @param path string the patch to the spritesheet.
---- @param number width the width of the sprite.
---- @param height number the height of the sprite.
 --- @param frames_duration table<number, table<Quad, number>> a table with keys from 1 to the number of sprites.
 --- Each key must have the duration of its sprite, in frames.
 --- @return Animation the new Animation.
-function DungeonAnimation:new(path, width, height, sprite_frame_data)
-    local new = setmetatable(_C.Animation:new(path, width, height, sprite_frame_data), self)
+function DungeonAnimation:new(path, sprite_frame_data)
+    local new = setmetatable(_C.Animation:new(path, sprite_frame_data), self)
 
     new.offset = -- TODO: careful, this is not correct for big sprites (Gyarados, Zapdos...)
         _C.Vector:new(
@@ -30,11 +28,15 @@ end
 --- Draws the current sprite of the DungeonAnimation.
 --- @param pos Vector the position to draw the DungeonAnimation.
 function DungeonAnimation:draw(pos)
+    -- We don't take care of self.mirror_x because a DungeonAnimation will never use that.
     love.graphics.draw(
         self.texture,
         self.sprites[self.current_sprite].quad,
-        pos:get_x() - self.offset:get_x(),
-        pos:get_y() - self.offset:get_y()
+        pos:get_x() - self.offset:get_x() + (self.mirror_x and self.width or 0),
+        pos:get_y() - self.offset:get_y(),
+        0,
+        self.mirror_x and -1 or 1,
+        1
     )
 end
 

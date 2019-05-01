@@ -45,6 +45,21 @@ function Vector:set_y(y)
     self.y = y
 end
 
+--- Returns the x and the y coordinates of the vector.
+--- @return number the x coordinate.
+--- @return number the y coordinate.
+function Vector:get_coordinates()
+    return self.x, self.y
+end
+
+--- Sets the x and the y coordinates of the vector.
+--- @param x number the x coordinate.
+--- @param y number the y coordinate.
+function Vector:set_coordinates(x, y)
+    self.x = x
+    self.y = y
+end
+
 --- Allows to sum vectors with the + operator.
 --- This metamethod sums the x and the y components of the Vectors and returns
 --- a new Vector with the result.
