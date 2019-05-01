@@ -22,6 +22,8 @@ function GamestateManager:new(gamestates, first_gamestate)
     return new
 end
 
+--- Creates a GamestateManager with no atributes, useful for inheritance.
+--- @return GamestateManager a new void GamestateManager.
 function GamestateManager:new_void()
     return setmetatable(_C.Object:new_void(), self)
 end

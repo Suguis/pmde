@@ -6,6 +6,8 @@ function Object:new()
     return setmetatable({}, self)
 end
 
+--- Creates a Object with no atributes, useful for inheritance.
+--- @return Object a new void Object.
 function Object:new_void()
     return setmetatable({}, self)
 end

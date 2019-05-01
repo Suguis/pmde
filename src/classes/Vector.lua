@@ -15,6 +15,8 @@ function Vector:new(x, y)
     return new
 end
 
+--- Creates an vector with no atributes, useful for inheritance.
+--- @return Vector a new void vector.
 function Vector:new_void()
     return setmetatable(_C.Object:new_void(), self)
 end

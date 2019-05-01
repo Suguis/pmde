@@ -15,6 +15,8 @@ function Gamestate:new()
     return new
 end
 
+--- Creates an Gamestate with no atributes, useful for inheritance.
+--- @return Gamestate a new void Gamestate.
 function Gamestate:new_void()
     return setmetatable(_C.Object:new_void(), self)
 end

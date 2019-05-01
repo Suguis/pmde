@@ -20,6 +20,8 @@ function DungeonPokemon:new(number, level, position)
     return new
 end
 
+--- Creates an DungeonPokemon with no atributes, useful for inheritance.
+--- @return DungeonPokemon a new void DungeonPokemon.
 function DungeonPokemon:new_void()
     return setmetatable(_C.Pokemon:new_void(), self)
 end

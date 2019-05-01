@@ -27,6 +27,8 @@ function Dungeon:new(name, total_floors, width, height, tileset_id)
     return new
 end
 
+--- Creates an Dungeon with no atributes, useful for inheritance.
+--- @return Dungeon a new void Dungeon.
 function Dungeon:new_void()
     return setmetatable(_C.Object:new_void(), self)
 end

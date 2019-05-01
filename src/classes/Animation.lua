@@ -34,6 +34,8 @@ function Animation:new(path, width, height, sprite_frame_data)
     return new
 end
 
+--- Creates an Animation with no atributes, useful for inheritance.
+--- @return Animation a new void Animation.
 function Animation:new_void()
     return setmetatable(_C.Object:new_void(), self)
 end

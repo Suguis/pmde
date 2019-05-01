@@ -45,6 +45,8 @@ function Cell:new(type)
     return new
 end
 
+--- Creates an Cell with no atributes, useful for inheritance.
+--- @return Cell a new void Cell.
 function Cell:new_void()
     return setmetatable(_C.Object:new(), self)
 end

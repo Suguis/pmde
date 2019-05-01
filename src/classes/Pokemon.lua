@@ -12,6 +12,8 @@ function Pokemon:new(number, level)
     return new
 end
 
+--- Creates a Pokemon with no atributes, useful for inheritance.
+--- @return Pokemon a new void Pokemon.
 function Pokemon:new_void()
     return setmetatable(_C.Object:new_void(), self)
 end

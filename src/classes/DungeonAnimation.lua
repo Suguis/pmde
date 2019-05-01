@@ -21,6 +21,8 @@ function DungeonAnimation:new(path, width, height, sprite_frame_data)
     return new
 end
 
+--- Creates an DungeonAnimation with no atributes, useful for inheritance.
+--- @return DungeonAnimation a new void DungeonAnimation.
 function DungeonAnimation:new_void()
     return setmetatable(_C.Animation:new_void(), self)
 end

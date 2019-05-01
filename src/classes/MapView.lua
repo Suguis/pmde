@@ -33,6 +33,8 @@ function MapView:new(center, floor, tileset)
     return new
 end
 
+--- Creates a MapView with no atributes, useful for inheritance.
+--- @return MapView a new void MapView.
 function MapView:new_void()
     return setmetatable(_C.Object:new_void(), self)
 end

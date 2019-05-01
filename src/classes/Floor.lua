@@ -47,6 +47,8 @@ function Floor:new(width, height)
     return new
 end
 
+--- Creates an Floor with no atributes, useful for inheritance.
+--- @return FLoor a new void Floor.
 function Floor:new_void()
     return setmetatable(_C.Object:new_void(), self)
 end
