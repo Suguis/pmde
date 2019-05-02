@@ -10,7 +10,7 @@ _C.Floor = require "src.classes.Floor"
 _C.GameState = require "src.classes.Gamestate"
 
 _C.Animation = require "src.classes.Animation"
-_C.DungeonAnimation = require "src.classes.DungeonAnimation"
+_C.DungeonPokemonAnimation = require "src.classes.DungeonPokemonAnimation"
 
 _C.Vector = require "src.classes.Vector"
 _C.MapView = require "src.classes.MapView"

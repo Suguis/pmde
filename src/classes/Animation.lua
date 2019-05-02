@@ -34,8 +34,7 @@ function Animation:new(path, sprite_frame_data)
     new.texture = texture
     new.sprites = sprites
     new.current_sprite = 1
-    new.start_time = sprite_frame_data.start / 60
-    new.current_time = new.start_time
+    new.current_time = 0
     new.duration = duration / 60
     new.position = sprite_frame_data and sprite_frame_data.position
     new.width = animation_width
@@ -76,7 +75,7 @@ end
 
 --- Resets the animation time
 function Animation:reset()
-    self.current_time = self.start_time
+    self.current_time = 0
     self.current_sprite = 1
 end
 

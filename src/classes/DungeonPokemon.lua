@@ -2,8 +2,6 @@
 local DungeonPokemon = _C.Pokemon:new_void()
 DungeonPokemon.__index = DungeonPokemon
 
-local inout = require "src.modules.inout"
-
 -- Static atributes
 DungeonPokemon.move_total_time = 12 / 60 -- the time that requires the move to be executed (12 frames when 60FPS)
 
@@ -14,8 +12,6 @@ DungeonPokemon.move_total_time = 12 / 60 -- the time that requires the move to b
 function DungeonPokemon:new(number, level, position)
     local new = setmetatable(_C.Pokemon:new(number, level), self)
 
-    local sprite_frame_data = inout.read_animation_data("res/animations/" .. number .. "/idle/animation.lua")
-
     new.position = position
     new.view_direction = _C.Vector:new(0, 1) -- Default view direction, the player will be looking down
     new.move_current_time = 0 -- The time passed since the beggining of the move.
@@ -23,10 +19,9 @@ function DungeonPokemon:new(number, level, position)
     new.move_final_pos = position -- Vector that will equals DungeonPokemon pos when it finishes the move
 
     new.animations = {
-        -- TODO: Hacer una clase DungeonPokemonAnimation (o algo así, o incluso eliminar DungeonAnimation y usar esta) que a partir del número cargue ya las animaciones correspondientes
-        up = _C.DungeonAnimation:new("res/animations/" .. number .. "/idle/up.png", sprite_frame_data),
-        down = _C.DungeonAnimation:new("res/animations/" .. number .. "/idle/down.png", sprite_frame_data),
-        lr = _C.DungeonAnimation:new("res/animations/" .. number .. "/idle/lr.png", sprite_frame_data)
+        up = _C.DungeonPokemonAnimation:new(number, "idle", "up"),
+        down = _C.DungeonPokemonAnimation:new(number, "idle", "down"),
+        lr = _C.DungeonPokemonAnimation:new(number, "idle", "lr")
     }
     new.current_animation = new.animations.down
 
