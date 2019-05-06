@@ -5,6 +5,6 @@
 - [x] Use delta time to make movements finish at same time on any FPS.
 - [x] Make player movement animations.
 - [ ] Study and make Tiny Woods dungeon generation pattern.
-- [ ] Make a LÖVE app that, with the spritesheet of the only needed sprites, allows to easily compose an animation with that app.
 - [ ] Create a LÖVE app called *Tileset mapper*, that consist on automatic tile masking and graphicall manual redefinition of tiles.
+- [ ] Make a LÖVE app that, with the spritesheet of the only needed sprites, allows to easily compose an animation with that app.
 - [ ] Make the DungeonPokemonEnemy class.

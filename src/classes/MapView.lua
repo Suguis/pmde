@@ -15,7 +15,7 @@ MapView.move_total_time = 12 / 60 -- 24 / 60 if normal speed
 function MapView:new(center, floor, tileset)
     local new = setmetatable(_C.Object:new(), self)
 
-    self.batch = love.graphics.newSpriteBatch(tileset, 512, "static") -- TODO: this needs to be static
+    self.batch = love.graphics.newSpriteBatch(tileset, 512, "static")
 
     new.center = center -- The grid cell that the view is centering
     new.position =
